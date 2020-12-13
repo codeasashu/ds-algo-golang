@@ -59,6 +59,14 @@ func demoBST() {
 	fmt.Println("Trees are equal?", areEqual);
 }
 
+func demoAVLTree() {
+	var tree trees.AVLTree;
+	tree.Insert(10);
+	tree.Insert(20);
+	tree.Insert(30);
+	fmt.Println(tree);
+}
+
 func main() {
 	// to run Linkedlist algo
 	// demoLinkedList();
@@ -68,4 +76,7 @@ func main() {
 
 	// to check queue
 	// demoQueue();
+
+	// Run AVLTree 
+	demoAVLTree();
 }
