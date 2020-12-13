@@ -48,12 +48,21 @@ func demoBST() {
 	fmt.Println(tree);
 	found := tree.Find(-15);
 	fmt.Println(found);
+
+	var otherTree trees.Bst;
+	otherTree.Insert(5);
+	otherTree.Insert(15);
+	otherTree.Insert(4);
+	otherTree.Insert(10);
+
+	areEqual := tree.Equals(otherTree);
+	fmt.Println("Trees are equal?", areEqual);
 }
 
 func main() {
 	// to run Linkedlist algo
 	// demoLinkedList();
-	
+
 	// to run BST Algo
 	// demoBST();
 

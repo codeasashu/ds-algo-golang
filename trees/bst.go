@@ -72,3 +72,39 @@ func (tree *Bst) Find(value int) bool {
 	}
 	return tree.root.Find(value);
 }
+
+// Equals compares two nodes recursively and checks if they are equal
+func (node *Node) Equals(other *Node) bool {
+	if node == nil && other == nil {
+		return true;
+	}
+
+	if node.value != other.value {
+		return false;
+	}
+
+	if isLeafNode(*node) == true {
+		return isLeafNode(*other) == true;
+	}
+
+	if node.leftChild == nil {
+		return other.leftChild == nil;
+	}
+
+	if node.rightChild == nil {
+		return other.rightChild == nil;
+	}
+
+	return (
+		node.leftChild.Equals(other.leftChild) &&
+		node.rightChild.Equals(other.rightChild));
+}
+
+// Equals compares equality of two trees
+func (tree Bst) Equals(other Bst) bool {
+	if tree.root == nil && other.root == nil {
+		return true;
+	}
+
+	return tree.root.Equals(other.root);
+}
