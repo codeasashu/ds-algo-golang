@@ -62,8 +62,8 @@ func demoBST() {
 func demoAVLTree() {
 	var tree trees.AVLTree;
 	tree.Insert(10);
-	tree.Insert(20);
 	tree.Insert(30);
+	tree.Insert(20);
 	fmt.Println(tree);
 }
 
@@ -78,5 +78,5 @@ func main() {
 	// demoQueue();
 
 	// Run AVLTree 
-	demoAVLTree();
+	// demoAVLTree();
 }

@@ -1,6 +1,8 @@
 package trees
 
-import "math"
+import (
+	"math"
+)
 
 // AVLNode is AVL tree node
 type AVLNode struct {
@@ -19,16 +21,12 @@ func isAVLLeafNode(node AVLNode) bool {
 	return (node.leftChild == nil && node.rightChild == nil);
 }
 
+// Height returns height of a node
 func (node *AVLNode) Height() int {
 	if node == nil {
-		return 0;
+		return -1;
 	}
-	if isAVLLeafNode(*node) {
-		return 0;
-	}
-	leftHeight := node.leftChild.Height();
-	rightHeight := node.rightChild.Height();
-	return int(math.Max(float64(leftHeight), float64(rightHeight))) + 1;
+	return node.height;
 }
 
 // Insert a value to a tree node
@@ -42,8 +40,79 @@ func (node *AVLNode) Insert(value int) *AVLNode {
 	} else {
 		node.leftChild = node.leftChild.Insert(value);
 	}
-	node.height = node.Height();
+
+	node.height = nodeHeight(*node);
+
+	node = node.balance();
+
 	return node;
+}
+
+func (node *AVLNode) balance() *AVLNode {
+	if isLeftHeavy(*node) {
+		if balanceFactor(*node.leftChild) < 0 {
+			node.leftChild = node.leftChild.rotateLeft();
+			// node.leftChild.height = nodeHeight(*node.leftChild);
+		}
+		node = node.rotateRight();
+		node.height = nodeHeight(*node);
+	} else if isRightHeavy(*node) {
+		if balanceFactor(*node.rightChild) > 0 {
+			node.rightChild = node.rightChild.rotateRight();
+			// node.rightChild.height = nodeHeight(*node.rightChild);
+		}
+		node = node.rotateLeft();
+		// node.height = nodeHeight(*node);
+	}
+	return node;
+}
+
+func (node *AVLNode) rotateLeft() *AVLNode {
+	newRoot := node.rightChild;
+	if newRoot.leftChild != nil {
+		node.rightChild = newRoot.leftChild;
+	} else {
+		node.rightChild = nil;
+	}
+	newRoot.leftChild = node;
+
+	node.height = nodeHeight(*node);
+	newRoot.height = nodeHeight(*newRoot);
+
+	return newRoot;
+}
+
+func (node *AVLNode) rotateRight() *AVLNode {
+	newRoot := node.leftChild;
+	if newRoot.rightChild != nil {
+		node.leftChild = newRoot.rightChild;
+	} else {
+		node.leftChild = nil;
+	}
+	newRoot.rightChild = node;
+
+	node.height = nodeHeight(*node);
+	newRoot.height = nodeHeight(*newRoot);
+
+	return newRoot;
+}
+
+func nodeHeight(node AVLNode) int {
+	nodeHeight := math.Max(
+		float64(node.leftChild.Height()), float64(node.rightChild.Height()));
+	return int(nodeHeight) + 1;
+}
+
+func isLeftHeavy(node AVLNode) bool {
+	return balanceFactor(node) > 1;
+}
+
+func isRightHeavy(node AVLNode) bool {
+	return balanceFactor(node) < -1;
+}
+
+func balanceFactor(node AVLNode) int {
+	return node.leftChild.Height() - node.rightChild.Height();
 }
 
 // Insert a value in tree
