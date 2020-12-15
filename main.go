@@ -67,6 +67,22 @@ func demoAVLTree() {
 	fmt.Println(tree);
 }
 
+func demoHeapTree() {
+	var heap trees.Heap;
+	heap.Insert(10);
+	heap.Insert(5);
+	heap.Insert(17);
+	heap.Insert(4);
+	heap.Insert(22);
+
+	heap.Remove();
+}
+
+func demoHeapify(input []int) {
+	var output = trees.Heapify(input);
+	fmt.Println("heapified", output);
+}
+
 func main() {
 	// to run Linkedlist algo
 	// demoLinkedList();
@@ -79,4 +95,8 @@ func main() {
 
 	// Run AVLTree 
 	// demoAVLTree();
+
+	// Run Heap tree
+	// demoHeapTree();
+	// demoHeapify([]int{5, 3, 8, 4});
 }
