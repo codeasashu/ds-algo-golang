@@ -57,6 +57,8 @@ func demoBST() {
 
 	areEqual := tree.Equals(otherTree);
 	fmt.Println("Trees are equal?", areEqual);
+
+	tree.Inorder();
 }
 
 func demoAVLTree() {

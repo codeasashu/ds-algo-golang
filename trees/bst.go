@@ -2,6 +2,7 @@ package trees
 
 import (
 	"errors"
+	"fmt"
 )
 
 // Node is BST tree node
@@ -107,4 +108,21 @@ func (tree Bst) Equals(other Bst) bool {
 	}
 
 	return tree.root.Equals(other.root);
+}
+
+func inorder(node *Node) {
+	if node == nil {
+		return;
+	}
+
+	inorder(node.leftChild); // Visit Left first
+	fmt.Printf("%d ", node.value); // Vist root
+	inorder(node.rightChild); // Visit right child
+}
+
+// Inorder BST traversal
+func (tree Bst) Inorder() {
+	fmt.Print("Inorder:")
+	inorder(tree.root);
+	fmt.Print("\n")
 }
