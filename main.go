@@ -102,5 +102,5 @@ func main() {
 	// Run Heap tree
 	// demoHeapTree();
 	// demoHeapify([]int{5, 3, 8, 4});
-	sorting.Run()
+	sorting.RunBubbleSort()
 }

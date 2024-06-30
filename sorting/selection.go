@@ -2,24 +2,10 @@ package sorting
 
 import "fmt"
 
-func findMinPos(arr []int) int {
-	minimum := 0
-	for i := range arr {
-		if arr[i] < arr[minimum] {
-			minimum = i
-		}
-	}
-	return minimum
-}
-
-func swapArr(arr []int, minimum int) []int {
-	tmp := arr[0]
-	arr[0] = arr[minimum]
-	arr[minimum] = tmp
-	return arr
-}
-
 func SelectionSort(arr []int) []int {
+	if len(arr) == 1 {
+		return arr
+	}
 	for i := 0; i < len(arr)-2; i++ {
 		mini := i
 		for j := i; j < len(arr)-1; j++ {
@@ -34,7 +20,7 @@ func SelectionSort(arr []int) []int {
 	return arr
 }
 
-func Run() {
+func RunSelectionSort() {
 	samplearr := []int{4, 3, 2, 1, 5}
 	newarr := SelectionSort(samplearr)
 	fmt.Println(newarr)
