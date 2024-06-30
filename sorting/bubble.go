@@ -22,7 +22,7 @@ func BubbleSort(arr []int) []int {
 }
 
 func RunBubbleSort() {
-	samplearr := []int{4, 3, 2, 1, 5}
+	samplearr := []int{13, 46, 24, 52, 20, 9}
 	newarr := BubbleSort(samplearr)
 	fmt.Println(newarr)
 }
